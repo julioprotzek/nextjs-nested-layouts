@@ -1,15 +1,16 @@
-import App, { Container } from 'next/app'
+import App from 'next/app'
+
+const NoLayout = ({ children }) => children
 
 export default class extends App {
   render () {
     const { Component, pageProps } = this.props
+    const Layout = Component.Layout || NoLayout
 
     return (
-      <Container>
-        <Component.Layout>
-          <Component {...pageProps} />
-        </Component.Layout>
-      </Container>
+      <Layout>
+        <Component {...pageProps} />
+      </Layout>
     )
   }
 }
